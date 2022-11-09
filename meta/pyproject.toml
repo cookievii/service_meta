@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "service-meta"
+version = "0.1.0"
+description = ""
+authors = ["Ilmir <you@Ðvalitovilmir29@gmail.com>"]
+readme = "README.md"
+packages = [{include = "service_meta"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.1.3"
+djangorestframework = "^3.14.0"
+python-dotenv = "^0.21.0"
+gunicorn = "^20.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

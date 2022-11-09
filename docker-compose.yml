@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  meta:
+    build: meta/
+    restart: always
+    command: >
+      sh -c "
+      python manage.py collectstatic --noinput &&
+      gunicorn service_meta.wsgi:application --bind 0.0.0.0:8000
+      "
+    volumes:
+      - static_value:/meta/static/
+      - media_value:/meta/media/
+
+  nginx:
+    image: nginx:1.19.3
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_value:/var/html/static/
+      - media_value:/var/html/media/
+    depends_on:
+      - meta
+
+volumes:
+  static_value:
+  media_value:
